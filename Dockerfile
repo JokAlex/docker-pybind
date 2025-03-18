@@ -25,8 +25,11 @@ FROM python:3.12
 WORKDIR /app
 
 
+RUN pip install pytest
+
+
 COPY /src/app .
 COPY --from=build /app/build/ .
 
 
-CMD ["python", "./main.py"]
+CMD ["pytest"]

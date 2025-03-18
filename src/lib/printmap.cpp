@@ -4,12 +4,12 @@
 #include <iostream>
 
 
-void printMap(const std::map<std::string, int>& namedValues)
+void printMap(const std::map<std::string, int>& namedValues, std::ostream& stream)
 {
-    std::cout << "{\n";
+    stream << "{\n";
     for (auto&& [name, value]: namedValues)
     {
-        std::cout << "\t'" << name << "': " << value << ",\n";
+        stream << "\t'" << name << "': " << value << ",\n";
     }
-    std::cout << "}\n";
+    stream << "}\n";
 }

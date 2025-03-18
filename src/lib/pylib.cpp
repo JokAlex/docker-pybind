@@ -3,6 +3,9 @@
 #include <pybind11/functional.h>
 
 
+#include <sstream>
+
+
 #include "answer.hpp"
 #include "printmap.hpp"
 #include "base.hpp"
@@ -16,7 +19,14 @@ PYBIND11_MODULE(bindlib, m)
 
     m.def("answer", &answer, "Answer to the Ultimate Question of Life, the Universe, and Everything");
 
-    m.def("printMap", &printMap, "Prints dict to stdout");
+    m.def("dictToStr", 
+          [](const std::map<std::string, int>& namedValues)
+          {
+              std::ostringstream stream;
+              printMap(namedValues, stream);
+              return stream.str();
+          },
+          "Converts dict to str");
     
     auto&& base = pybind11::class_<Base>(m, "Base")
         .def(pybind11::init<>())
